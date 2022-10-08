@@ -51,6 +51,13 @@ class Game {
             }
         }
         board = List(columns) { listOf() }      // Create empty game board(2D array)
+
+        // Print new game details to standard output
+        println("""
+            $firstPlayer VS $secondPlayer
+            $rows x $columns board
+        """.trimIndent())
+        printBoard()
     }
 
     private fun printBoard() {
