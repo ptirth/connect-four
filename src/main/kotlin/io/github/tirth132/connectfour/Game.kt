@@ -60,6 +60,39 @@ class Game {
         printBoard()
     }
 
+    fun start() {
+        var firstPlayerTurn = true
+        while (true) {
+            val playerName = if (firstPlayerTurn) firstPlayer else secondPlayer
+            val input = readInput("$playerName's turn")
+
+            if (input == "end") {
+                println("Game over!")
+                break
+            }
+
+            if (input.toIntOrNull() == null) {
+                println("Invalid column number")
+                continue
+            }
+
+            val columnNumber = input.toInt()
+            if (columnNumber !in 1..columns) {
+                println("The column number is out of range (1 - $columns)")
+                continue
+            }
+
+            if (board[columnNumber - 1].size >= rows) {
+                println("Column $columnNumber is full")
+                continue
+            }
+
+            board[columnNumber - 1].add(if (firstPlayerTurn) "o" else "*")
+            printBoard()
+            firstPlayerTurn = !firstPlayerTurn
+        }
+    }
+
     private fun printBoard() {
         val boardStr = StringBuilder()
         repeat(columns) { boardStr.append(" ${it + 1}") }
