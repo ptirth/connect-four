@@ -14,7 +14,7 @@ class Game {
     private lateinit var secondPlayer: String
     private var columns: Int = DEFAULT_COLUMNS
     private var rows: Int = DEFAULT_ROWS
-    private lateinit var board: List<List<String>>
+    private lateinit var board: List<MutableList<String>>
 
     fun init() {
         firstPlayer = readInput("First player's name")
@@ -50,7 +50,7 @@ class Game {
                 break
             }
         }
-        board = List(columns) { listOf() }      // Create empty game board(2D array)
+        board = List(columns) { mutableListOf() }      // Create empty game board(2D array)
 
         // Print new game details to standard output
         println("""
