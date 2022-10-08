@@ -35,7 +35,7 @@ class Game {
                     continue
                 }
                 if (columns !in MIN_COLUMNS..MAX_COLUMNS) {
-                    println("Board rows should be from $MIN_COLUMNS to $MAX_COLUMNS")
+                    println("Board columns should be from $MIN_COLUMNS to $MAX_COLUMNS")
                     continue
                 }
 
