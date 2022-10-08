@@ -1,5 +1,7 @@
 package io.github.tirth132.connectfour
 
+import java.lang.StringBuilder
+
 const val DEFAULT_ROWS = 6
 const val DEFAULT_COLUMNS = 6
 const val MIN_ROWS = 5
@@ -49,6 +51,36 @@ class Game {
             }
         }
         board = List(columns) { listOf() }      // Create empty game board(2D array)
+    }
+
+    private fun printBoard() {
+        val boardStr = StringBuilder()
+        repeat(columns) { boardStr.append(" ${it + 1}") }
+        boardStr.append("\n")
+
+        repeat(rows) {
+            boardStr.append("║")
+
+            for (column in board) {
+                val currentRowNumber = rows - it
+                boardStr.append(
+                    if (column.size >= currentRowNumber) {
+                        // If column has disk in current row add it
+                        column[currentRowNumber - 1]
+                    } else {
+                        // If current row of column is empty add space
+                        " "
+                    }
+                ).append("║")
+            }
+            boardStr.append("\n")
+        }
+
+        boardStr.append("╚")
+        repeat(columns - 1) { boardStr.append("═╩") }
+        boardStr.append("═╝")
+
+        println(boardStr.toString())
     }
 
     private fun readInput(prompt: String): String {
