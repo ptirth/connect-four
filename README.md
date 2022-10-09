@@ -5,6 +5,20 @@ language, conditional statements, loops, jump and break, standard input/output
 etc. You need to know basic Kotlin to be able to complete the project. It is a 
 fun project.
 
+# Get on your computer
+To get the game on your computer you need to clone the repository from GitHub.
+Enter following command to clone the repository.
+```
+git clone git@github.com:tirth132/connect-four.git
+```
+or
+```
+git clone https://github.com/tirth132/connect-four.git
+```
+The project uses Gradle as build system and doesn't include any IDE
+configuration files. You can open it in any IDE and run it. You can also run it
+ manually from terminal without any IDE.
+ 
 # How to play
 Run the `Main.kt` class from your IDE(or from command line if you want to). It
 will print game name on startup and then ask for player names. After that you
