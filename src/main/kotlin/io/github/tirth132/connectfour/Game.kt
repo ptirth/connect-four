@@ -21,9 +21,10 @@ class Game {
         secondPlayer = readInput("Second player's name")
 
         val promptMsg = """
-                Set the board dimensions (Rows x Columns)
-                Press Enter for default ($DEFAULT_ROWS x $DEFAULT_COLUMNS)
-            """.trimIndent()
+        Set the board dimensions (Rows x Columns)
+        Press Enter for default ($DEFAULT_ROWS x $DEFAULT_COLUMNS)
+        """.trimIndent()
+
         while (true) {
             val userInput = readInput(promptMsg).lowercase().replace("\\s+".toRegex(), "")
 
@@ -54,8 +55,8 @@ class Game {
 
         // Print new game details to standard output
         println("""
-            $firstPlayer VS $secondPlayer
-            $rows x $columns board
+        $firstPlayer VS $secondPlayer
+        $rows x $columns board
         """.trimIndent())
         printBoard()
     }
