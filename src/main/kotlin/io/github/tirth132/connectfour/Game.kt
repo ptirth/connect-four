@@ -1,6 +1,6 @@
 package io.github.tirth132.connectfour
 
-import java.lang.StringBuilder
+import kotlin.text.StringBuilder
 
 const val DEFAULT_ROWS = 6
 const val DEFAULT_COLUMNS = 6
@@ -88,10 +88,72 @@ class Game {
                 continue
             }
 
-            board[columnNumber - 1].add(if (firstPlayerTurn) "o" else "*")
+            val playerDisk = if (firstPlayerTurn) "o" else "*"
+            board[columnNumber - 1].add(playerDisk)
             printBoard()
             firstPlayerTurn = !firstPlayerTurn
+
+            if (checkWin(columnNumber - 1, playerDisk)) {
+                println(
+                    """
+                    Player $playerName won
+                    Game over!
+                    """.trimIndent()
+                )
+                break
+            }
+
+            if (checkDraw()) {
+                println(
+                    """
+                    It's a draw
+                    Game over!
+                    """.trimIndent()
+                )
+                break
+            }
         }
+    }
+
+    private fun checkDraw(): Boolean {
+        for (column in board) { if (column.size != rows) return false }
+        return true
+    }
+
+    private fun checkWin(lastColumn: Int, playerDisk: String): Boolean {
+        val lastRow = board[lastColumn].lastIndex
+
+        val diagonal1 = StringBuilder()
+        val diagonal2 = StringBuilder()
+        val row = StringBuilder()
+        val column = StringBuilder()
+
+        fun addElement(i: Int, j: Int, entry: StringBuilder) =
+            entry.append(
+                if (j > board[i].lastIndex) "-"
+                else board[i][j]
+            )
+
+        for (i in board.indices) {
+            for (j in 0 until rows) {
+                if (i - j == lastColumn - lastRow) addElement(i, j, diagonal1)
+
+                if (i + j == lastColumn + lastRow) addElement(i, j, diagonal2)
+
+                if (i == lastColumn) addElement(i, j, column)
+
+                if (j == lastRow) addElement(i, j, row)
+            }
+        }
+        val pattern = (if (playerDisk == "*") "\\*" else "o")
+            .repeat(4).toRegex()
+
+        println("$diagonal1|$diagonal2|$row|$column")
+
+        return diagonal1.contains(pattern) ||
+                diagonal2.contains(pattern) ||
+                column.contains(pattern) ||
+                row.contains(pattern)
     }
 
     private fun printBoard() {
