@@ -1,7 +1,5 @@
 package io.github.tirth132.connectfour
 
-import kotlin.text.StringBuilder
-
 const val DEFAULT_ROWS = 6
 const val DEFAULT_COLUMNS = 6
 const val MIN_ROWS = 5
@@ -54,10 +52,12 @@ class Game {
         board = List(columns) { mutableListOf() }      // Create empty game board(2D array)
 
         // Print new game details to standard output
-        println("""
-        $firstPlayer VS $secondPlayer
-        $rows x $columns board
-        """.trimIndent())
+        println(
+            """
+            $firstPlayer VS $secondPlayer
+            $rows x $columns board
+            """.trimIndent()
+        )
         printBoard()
     }
 
@@ -116,7 +116,9 @@ class Game {
     }
 
     private fun checkDraw(): Boolean {
-        for (column in board) { if (column.size != rows) return false }
+        for (column in board) {
+            if (column.size != rows) return false
+        }
         return true
     }
 
