@@ -150,8 +150,6 @@ class Game {
         val pattern = (if (playerDisk == "*") "\\*" else "o")
             .repeat(4).toRegex()
 
-        println("$diagonal1|$diagonal2|$row|$column")
-
         return diagonal1.contains(pattern) ||
                 diagonal2.contains(pattern) ||
                 column.contains(pattern) ||
